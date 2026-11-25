@@ -6,7 +6,7 @@ import HeartRain from "./HeartRain";
 import TreasureChest from "./TreasureChest";
 
 // Change these two names to make it yours
-const TO = "my love";
+const TO = "Roshni";
 const FROM = "Karan";
 
 const LETTER = [
