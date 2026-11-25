@@ -1,26 +1,150 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #fff1f4;
+  --bg2: #ffd9e4;
+  --pink: #ff5fa2;
+  --pink-d: #e63d86;
+  --cocoa: #7a4a3a;
+  --ink: #3a2a2e;
+  --paper: #fffaf6;
+  --paper-line: #f4dfd8;
+  --on-pink: #ffffff;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme="light"]) {
+    --bg: #2a1620;
+    --bg2: #3d1f2d;
+    --ink: #ffe9ef;
+    --paper: #3a2430;
+    --paper-line: #4d3341;
+    --cocoa: #f0b9a3;
   }
 }
 
+:root[data-theme="dark"] {
+  --bg: #2a1620;
+  --bg2: #3d1f2d;
+  --ink: #ffe9ef;
+  --paper: #3a2430;
+  --paper-line: #4d3341;
+  --cocoa: #f0b9a3;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg2: var(--bg2);
+  --color-pink: var(--pink);
+  --color-pink-d: var(--pink-d);
+  --color-cocoa: var(--cocoa);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-line: var(--paper-line);
+  --color-on-pink: var(--on-pink);
+  --font-sans: var(--font-quicksand), system-ui, sans-serif;
+  --font-hand: var(--font-caveat), cursive;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(circle at 50% 0, var(--bg2), var(--bg) 70%) fixed;
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.splash-bg {
+  background: radial-gradient(circle at 50% 0, var(--bg2), var(--bg) 70%);
+}
+
+.paper-ruled {
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    transparent 0 33px,
+    var(--paper-line) 33px 34px
+  );
+  box-shadow: 0 14px 34px rgba(122, 74, 58, 0.18);
+}
+
+@keyframes pulse-heart {
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+@keyframes nudge-arrow {
+  50% {
+    transform: translateX(7px);
+  }
+}
+
+@keyframes blink-heart {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pop-chip {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fall-heart {
+  to {
+    transform: translateY(110vh) rotate(40deg);
+  }
+}
+
+.animate-pulse-heart {
+  animation: pulse-heart 1.6s ease-in-out infinite;
+}
+
+.animate-nudge-arrow {
+  animation: nudge-arrow 1.6s ease-in-out infinite;
+}
+
+.animate-pop-chip {
+  animation: pop-chip 0.5s forwards;
+}
+
+.animate-fall-heart {
+  animation: fall-heart linear forwards;
+}
+
+.cursor-heart::after {
+  content: "♥";
+  color: var(--pink);
+  margin-left: 3px;
+  animation: blink-heart 1s steps(2) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse-heart,
+  .animate-nudge-arrow {
+    animation: none;
+  }
 }
